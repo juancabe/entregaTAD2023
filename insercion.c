@@ -2,29 +2,62 @@
 #include "listas/lista.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void insercion(Lista *l){
 
-    tipoPosicion i = siguiente(primero(l), l), j;
-    tipoElemento x;
+    Lista * listaOrdenada;
+    tipoPosicion desordenada;
+    tipoPosicion ordenada;
+    tipoElemento elementoDesordenada;
 
-    while(siguiente(i, l) != NULL){
-        x = recupera(i, l);
-        j = anterior(i, l);
-        
-        while(j != NULL && recupera(j, l) > x){
-            
-            suprime(siguiente(j, l), l);
-            inserta(recupera(j, l), siguiente(j, l), l);
-            j = anterior(j, l);
+    if(NULL == (listaOrdenada = malloc(sizeof(Lista)))){
+        return;
+    }
+
+    if(creaVacia(listaOrdenada) < 0){
+        return;
+    }
+
+    do{
+        desordenada = primero(l);
+        elementoDesordenada = recupera(desordenada, l);
+        suprime(desordenada, l);
+
+        if(elementoDesordenada > recuperaUltimo(listaOrdenada)){
+            inserta(elementoDesordenada, fin(listaOrdenada), listaOrdenada);
+        }
+        else if(elementoDesordenada < recupera(primero(listaOrdenada), listaOrdenada)){
+            inserta(elementoDesordenada, primero(listaOrdenada), listaOrdenada);
+        }
+        else{
+            ordenada = primero(listaOrdenada);
+
+            fprintf(stderr, "Se mete :))))\n");
+
+            do{ 
+
+                if((elementoDesordenada > recupera(ordenada, listaOrdenada) && elementoDesordenada < recupera(siguiente(ordenada, listaOrdenada), listaOrdenada)) || elementoDesordenada == recupera(ordenada, listaOrdenada)){
+                    inserta(elementoDesordenada, siguiente(ordenada, listaOrdenada), listaOrdenada);
+                    break;
+                }                
+                
+                ordenada = siguiente(ordenada, listaOrdenada);
+                
+            }while(ordenada != fin(listaOrdenada));
 
         }
 
-        suprime(siguiente(j, l), l);
-        inserta(x, siguiente(j, l), l);
+        fprintf(stderr, "Lista ordenada: ");
+        imprime(listaOrdenada);
+        fprintf(stderr, "\n\n");
 
-        i = siguiente(i, l);
-        
-    }
+        fprintf(stderr, "Lista desordenada: ");
+        imprime(l);
+        fprintf(stderr, "\n\n");
+        char desecho;
+        scanf("%s", &desecho);
+
+    }while(desordenada != fin(l));
 
 }

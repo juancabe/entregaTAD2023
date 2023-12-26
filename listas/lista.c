@@ -63,7 +63,7 @@ imprime(Lista *l)
         posicion = 1;
         aImprimir = l->raiz->sig;
         while (aImprimir != NULL) {
-            printf(" %d ",aImprimir->elemento);
+            fprintf(stderr, " %d ",aImprimir->elemento);
             // "Las funciones a implementar no mostrarán ningún mensaje por pantalla, en ningún caso."
             aImprimir = aImprimir->sig;
         }
@@ -92,12 +92,12 @@ anterior(tipoPosicion p, Lista *l)
 tipoPosicion
 primero(Lista *l)
 {
- if (l == NULL) {
-        return NULL;
-    }
+    if (l == NULL) {
+            return NULL;
+        }
     else
         return l->raiz;
-    
+        
 }
 
 

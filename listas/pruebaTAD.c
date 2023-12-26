@@ -1,12 +1,9 @@
-// Programa para probar todas las funciones del TAD Lista
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "lista.h"
 
 int main(int argc, char *argv[])
 {   
-    // Probaremos todas las funciones declaradas en el header lista.h
 
     Lista miLista;
     tipoPosicion p;
@@ -32,65 +29,21 @@ int main(int argc, char *argv[])
     imprime(&miLista);
     printf("\n");
 
-    // Ahora probamos la función recupera
 
-    // Obtenemos la posicion 5 de la lista
+    // Ahora cambiaremos el valor del elemento de la posición 5 por el 100
 
-    p = primero(&miLista);
-    for (int i = 0; i < 4; i++) {
-        p = siguiente(p, &miLista);
-    }
-
-    printf("Recuperamos el elemento en la posición 5: %d\n", recupera(p, &miLista));
+    p = primero(&miLista);  // Obtenemos la primera posición de la lista
     
-    // Probamos la función localiza
 
-    printf("Localizamos el elemento 5: %p\n", localiza(5, &miLista));
-
-    // Probamos la función anterior
-
-    printf("El elemento anterior a la posición 5 es: %d\n", recupera(anterior(p, &miLista), &miLista));
-
-    // Probamos la función siguiente
-
-    printf("El elemento siguiente a la posición 5 es: %d\n", recupera(siguiente(p, &miLista), &miLista));
-
-    // Probamos la función primero
-
-    printf("El primer elemento de la lista es: %d\n", recupera(primero(&miLista), &miLista));
-
-    // Probamos la función fin
-
-    printf("El último elemento de la lista es: %d\n", recupera(anterior(fin(&miLista), &miLista), &miLista));
-
-    // Probamos la función vacia
-
-    printf("La lista está vacía?: %d\n", vacia(&miLista));
-
-    // Probamos la función suprime
-
-    printf("Suprimimos el elemento en la posición 5: %d\n", suprime(p, &miLista));
+    printf("Cambiando el valor del elemento de la posición 5 por el 100\n");
+    suprime(p, &miLista);
+    inserta(100, p, &miLista);
 
     // Imprimimos la lista
 
     printf("Lista: ");
     imprime(&miLista);
-
-    // Probamos la función destruye
-
-    printf("\nDestruimos la lista: %d\n", destruye(&miLista));
-
-    // Probamos la función creaVacia
-
-    printf("Creamos una lista vacía: %d\n", creaVacia(&miLista));
-
-    // Probamos la función vacia
-
-    printf("La lista está vacía: %d\n", vacia(&miLista));
-
-    // Probamos la función destruye
-
-    printf("Destruimos la lista: %d\n", destruye(&miLista));
+    printf("\n");
 
     return 0;
 
