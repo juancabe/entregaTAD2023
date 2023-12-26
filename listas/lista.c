@@ -79,7 +79,7 @@ anterior(tipoPosicion p, Lista *l)
         return NULL;
     }
     else if (p == l->raiz){
-        return NULL;
+        return l->raiz;
     }
     else {
         anterior = l->raiz;
@@ -154,6 +154,10 @@ suprime (tipoPosicion p, Lista *l)
         return 0;
     }
     else {
+
+        if(p->sig == fin(l)){
+            l->ultimo = p;
+        }
         
         tipoPosicion aux = p->sig;
         

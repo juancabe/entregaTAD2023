@@ -2,7 +2,6 @@
 #include "listas/lista.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 
 void insercion(Lista *l){
 
@@ -33,11 +32,11 @@ void insercion(Lista *l){
         else{
             ordenada = primero(listaOrdenada);
 
-            fprintf(stderr, "Se mete :))))\n");
-
             do{ 
 
-                if((elementoDesordenada > recupera(ordenada, listaOrdenada) && elementoDesordenada < recupera(siguiente(ordenada, listaOrdenada), listaOrdenada)) || elementoDesordenada == recupera(ordenada, listaOrdenada)){
+                if((elementoDesordenada > recupera(ordenada, listaOrdenada) && elementoDesordenada < recupera(siguiente(ordenada, listaOrdenada), listaOrdenada))  || 
+                    elementoDesordenada == recupera(ordenada, listaOrdenada)){
+
                     inserta(elementoDesordenada, siguiente(ordenada, listaOrdenada), listaOrdenada);
                     break;
                 }                
@@ -48,16 +47,9 @@ void insercion(Lista *l){
 
         }
 
-        fprintf(stderr, "Lista ordenada: ");
-        imprime(listaOrdenada);
-        fprintf(stderr, "\n\n");
-
-        fprintf(stderr, "Lista desordenada: ");
-        imprime(l);
-        fprintf(stderr, "\n\n");
-        char desecho;
-        scanf("%s", &desecho);
-
     }while(desordenada != fin(l));
+
+    destruye(l);
+    l->raiz = listaOrdenada->raiz;
 
 }
