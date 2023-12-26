@@ -34,6 +34,13 @@ int main(int argc, char *argv[])
 
     // Ahora probamos la función recupera
 
+    // Obtenemos la posicion 5 de la lista
+
+    p = primero(&miLista);
+    for (int i = 0; i < 4; i++) {
+        p = siguiente(p, &miLista);
+    }
+
     printf("Recuperamos el elemento en la posición 5: %d\n", recupera(p, &miLista));
     
     // Probamos la función localiza
@@ -54,7 +61,7 @@ int main(int argc, char *argv[])
 
     // Probamos la función fin
 
-    printf("El último elemento de la lista es: %d\n", recupera(fin(&miLista), &miLista));
+    printf("El último elemento de la lista es: %d\n", recupera(anterior(fin(&miLista), &miLista), &miLista));
 
     // Probamos la función vacia
 

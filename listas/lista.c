@@ -199,7 +199,7 @@ localiza (tipoElemento x, Lista *l)
 
         aux = l->raiz;
 
-        while (aux->sig != l->ultimo || aux->sig->elemento != x)
+        while (aux->sig != l->ultimo && aux->sig->elemento != x)
             aux = aux->sig;
 
         if(aux->sig->elemento == x)
@@ -218,6 +218,14 @@ recupera(tipoPosicion p, Lista *l)
     tipoCelda *aux;
     
     if (l == NULL || l->raiz == NULL || p == NULL || p->sig == NULL) {
+        if(l->raiz == NULL)
+            return -1;
+        else if(p == NULL)
+            return -2;
+        else if(p->sig == NULL)
+            return -3;
+        else
+            return -4;
         return 0;
     }
     else {
