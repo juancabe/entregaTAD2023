@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
     // Probamos la función vacia
 
-    printf("La lista está vacía: %d\n", vacia(&miLista));
+    printf("La lista está vacía?: %d\n", vacia(&miLista));
 
     // Probamos la función suprime
 
