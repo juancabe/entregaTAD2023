@@ -21,41 +21,106 @@ int main(int argc, char *argv[])
 	}
 
 	f = fopen(argv[1], "w+");
-	fprintf(f,"n           ;tiempoMedio;  repeticiones\n");
-
 	
 
-	for (numElementos=500;numElementos<=6000;numElementos=500+numElementos*3) {
+	// Lista con valores aleatorios
+	fprintf(f,"\n Lista con valores aleatorios\n");
+	fprintf(f,"n,tiempoMedio,repeticiones\n");
+	for (numElementos=5000;numElementos<=60000;numElementos=5000+numElementos) {
         
-		Lista miLista;
+		Lista * miLista = malloc(sizeof(Lista));
 		tipoPosicion p;
 
 		repeticiones=0;
-		creaVacia(&miLista);
-		anula(&miLista);	
-		p = primero(&miLista);
+		creaVacia(miLista);
+		p = primero(miLista);
 		for (int i = 0; i < numElementos; i++) { 
-			inserta(rand()%100000,p,&miLista);
-			p = siguiente(p,&miLista);
+			inserta(rand()%100000,p,miLista);
+			p = siguiente(p,miLista);
 		}
 		printf("\n Lista creada con %d elementos\n",numElementos);
 		tiempoInicial = tiempoFinal= (double)clock();
 
 		while (tiempoFinal-tiempoInicial < tiempoMinimo) 
 		{ 	
-			insercion(&miLista);
+			insercion(miLista);
 			repeticiones++;
 		    tiempoFinal = (double) clock();
-			fprintf(stderr, " %d ;%g ; %d \n", numElementos,tiempo,repeticiones);
 		}
 
 		tiempo =  (tiempoFinal - tiempoInicial ) / (double)CLOCKS_PER_SEC /repeticiones;
 		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
-		fprintf(f, " %d ;%g ; %d \n", numElementos,tiempo,repeticiones);
+		fprintf(f, " %d ,%g , %d \n", numElementos,tiempo,repeticiones);
 
-		anula(&miLista);
-		destruye(&miLista);
 	}
+
+	fprintf(f,"\n Lista ordenada en orden creciente\n");
+	fprintf(f,"n,tiempoMedio,repeticiones\n");
+	// Lista ordenada en orden creciente
+
+	for (numElementos=5000;numElementos<=60000;numElementos=5000+numElementos) {
+        
+		Lista * miLista = malloc(sizeof(Lista));
+		tipoPosicion p;
+
+		repeticiones=0;
+		creaVacia(miLista);
+		p = primero(miLista);
+		for (int i = 0; i < numElementos; i++) { 
+			inserta(i,p,miLista);
+			p = siguiente(p,miLista);
+		}
+		printf("\n Lista creada con %d elementos\n",numElementos);
+		tiempoInicial = tiempoFinal= (double)clock();
+
+		while (tiempoFinal-tiempoInicial < tiempoMinimo) 
+		{ 	
+			insercion(miLista);
+			repeticiones++;
+		    tiempoFinal = (double) clock();
+		}
+
+		tiempo =  (tiempoFinal - tiempoInicial ) / (double)CLOCKS_PER_SEC /repeticiones;
+		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
+		fprintf(f, " %d ,%g , %d \n", numElementos,tiempo,repeticiones);
+
+	}
+
+	fprintf(f,"\n Lista ordenada en orden decreciente\n");
+	fprintf(f,"n,tiempoMedio,repeticiones\n");
+	// Lista ordenada en orden decreciente
+
+	for (numElementos=5000;numElementos<=60000;numElementos=5000+numElementos) {
+        
+		Lista * miLista = malloc(sizeof(Lista));
+		tipoPosicion p;
+
+		repeticiones=0;
+		creaVacia(miLista);
+		p = primero(miLista);
+		for (int i = 0; i < numElementos; i++) { 
+			inserta(numElementos-i,p,miLista);
+			p = siguiente(p,miLista);
+		}
+		printf("\n Lista creada con %d elementos\n",numElementos);
+		tiempoInicial = tiempoFinal= (double)clock();
+
+		while (tiempoFinal-tiempoInicial < tiempoMinimo) 
+		{ 	
+			insercion(miLista);
+			repeticiones++;
+		    tiempoFinal = (double) clock();
+		}
+
+		tiempo =  (tiempoFinal - tiempoInicial ) / (double)CLOCKS_PER_SEC /repeticiones;
+		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
+		fprintf(f, " %d ,%g , %d \n", numElementos,tiempo,repeticiones);
+
+	}
+
+
+
+
    	fclose(f);
 return 0;
 }

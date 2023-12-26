@@ -18,6 +18,9 @@ void insercion(Lista *l){
         return;
     }
 
+    inserta(recupera(primero(l), l), primero(listaOrdenada), listaOrdenada);
+    suprime(primero(l), l);
+
     do{
         desordenada = primero(l);
         elementoDesordenada = recupera(desordenada, l);
@@ -33,7 +36,6 @@ void insercion(Lista *l){
             ordenada = primero(listaOrdenada);
 
             do{ 
-
                 if((elementoDesordenada > recupera(ordenada, listaOrdenada) && elementoDesordenada < recupera(siguiente(ordenada, listaOrdenada), listaOrdenada))  || 
                     elementoDesordenada == recupera(ordenada, listaOrdenada)){
 
@@ -47,9 +49,13 @@ void insercion(Lista *l){
 
         }
 
+
     }while(desordenada != fin(l));
+
+
     anula(l);
     destruye(l);
     l->raiz = listaOrdenada->raiz;
+    l->ultimo = listaOrdenada->ultimo;
 
 }
