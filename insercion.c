@@ -48,7 +48,7 @@ void insercion(Lista *l){
         }
 
     }while(desordenada != fin(l));
-
+    anula(l);
     destruye(l);
     l->raiz = listaOrdenada->raiz;
 

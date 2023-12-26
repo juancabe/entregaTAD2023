@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/juan/Documents/2o curso/1er cuatrimestre/EDyA/entrega/entregaTAD2023",
+            "binaryPath": "/home/juan/Documents/2o curso/1er cuatrimestre/EDyA/entrega/entregaTAD2023/pruebaInsercion",
+            "binaryArgs": []
+        }
+    ]
+}

@@ -2,38 +2,62 @@
 #include <stdlib.h>
 #include "listas/lista.h"
 #include "insercion.h"
-
+#include <time.h>
 
 int main(int argc, char *argv[])
-{   
-	Lista miLista;
-	tipoPosicion p;
-	int numElementos = 20, codigoError,i;
+{ 
+	//clock_t tiempoInicial , tiempoFinal ;
+	double tiempoInicial , tiempoFinal, tiempoMinimo=1*CLOCKS_PER_SEC ;
+	
+	double tiempo;
 
-	if (argc > 2) {
-		printf("\n Uso: ./pruebaInsercion <número de elementos de la lista>\n\n");
+	int *vector, *vectorOrdenado, rango=100000, numElementos=10000,i,repeticiones=0;
+        
+	FILE *f;  
+ 	
+	if (argc != 2) {
+		printf("\n Uso: ./eje1 <nombre fichero resultados>\n\n");
 		return -1;
 	}
-	if (argc==2) 
-		numElementos=atoi(argv[1]); 
 
-	printf("Creando lista vacía: %d\n", creaVacia(&miLista));
+	f = fopen(argv[1], "w+");
+	fprintf(f,"n           ;tiempoMedio;  repeticiones\n");
 
-	printf("Se crea una lista de %d elementos\n", numElementos);
-	anula(&miLista);	
-	p = primero(&miLista);
-	for (i = 0; i < numElementos; i++) { 
-		codigoError = inserta(rand()%100000,p,&miLista);
-		p = siguiente(p,&miLista);
+	
+
+	for (numElementos=500;numElementos<=6000;numElementos=500+numElementos*3) {
+        
+		Lista miLista;
+		tipoPosicion p;
+
+		repeticiones=0;
+		creaVacia(&miLista);
+		anula(&miLista);	
+		p = primero(&miLista);
+		for (int i = 0; i < numElementos; i++) { 
+			inserta(rand()%100000,p,&miLista);
+			p = siguiente(p,&miLista);
+		}
+		printf("\n Lista creada con %d elementos\n",numElementos);
+		tiempoInicial = tiempoFinal= (double)clock();
+
+		while (tiempoFinal-tiempoInicial < tiempoMinimo) 
+		{ 	
+			insercion(&miLista);
+			repeticiones++;
+		    tiempoFinal = (double) clock();
+			fprintf(stderr, " %d ;%g ; %d \n", numElementos,tiempo,repeticiones);
+		}
+
+		tiempo =  (tiempoFinal - tiempoInicial ) / (double)CLOCKS_PER_SEC /repeticiones;
+		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
+		fprintf(f, " %d ;%g ; %d \n", numElementos,tiempo,repeticiones);
+
+		anula(&miLista);
+		destruye(&miLista);
 	}
-	imprime(&miLista);
-	printf("\nComienza la ordenación \n");
-	insercion(&miLista);
-	printf("\nLista Ordenada \n");
-	imprime(&miLista);
-	//anula(&miLista);
-
-	//destruye(&miLista); 
-	return 0;
+   	fclose(f);
+return 0;
 }
+
 
