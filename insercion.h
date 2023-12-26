@@ -3,6 +3,6 @@
 
 #include "listas/lista.h"
 
-void ordenacionInsercion(Lista *l);
+void insercion(Lista *l);
 
 #endif

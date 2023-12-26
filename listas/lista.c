@@ -63,7 +63,7 @@ imprime(Lista *l)
         posicion = 1;
         aImprimir = l->raiz->sig;
         while (aImprimir != NULL) {
-            // printf(" %d ",aImprimir->elemento); linea elminada por condición de enunciado: 
+            printf(" %d ",aImprimir->elemento);
             // "Las funciones a implementar no mostrarán ningún mensaje por pantalla, en ningún caso."
             aImprimir = aImprimir->sig;
         }
@@ -79,7 +79,7 @@ anterior(tipoPosicion p, Lista *l)
         return NULL;
     }
     else if (p == l->raiz){
-        return l->raiz;
+        return NULL;
     }
     else {
         anterior = l->raiz;
@@ -232,10 +232,15 @@ recupera(tipoPosicion p, Lista *l)
 int
 anula(Lista *l)
 {
+    tipoPosicion aux = primero(l)->sig;
 
-    vacia(l);
+    while(aux != NULL){
+        aux = aux->sig;
+        free(aux);
+    }
 
-    return destruye(l);
+    l->raiz;
+    l->ultimo = l->raiz;
     
 }
 

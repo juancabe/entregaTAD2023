@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h"
+#include "listas/lista.h"
 #include "insercion.h"
 
 
@@ -31,9 +31,9 @@ int main(int argc, char *argv[])
 	insercion(&miLista);
 	printf("\nLista Ordenada \n");
 	imprime(&miLista);
-	anula(&miLista);
+	//anula(&miLista);
 
-	destruye(&miLista); 
+	//destruye(&miLista); 
 	return 0;
 }
 
