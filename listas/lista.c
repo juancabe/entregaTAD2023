@@ -63,7 +63,7 @@ imprime(Lista *l)
         posicion = 1;
         aImprimir = l->raiz->sig;
         while (aImprimir != NULL) {
-            fprintf(stderr, " %d ",aImprimir->elemento);
+            printf(" %d ",aImprimir->elemento);
             // "Las funciones a implementar no mostrarán ningún mensaje por pantalla, en ningún caso."
             aImprimir = aImprimir->sig;
         }
@@ -244,14 +244,15 @@ recupera(tipoPosicion p, Lista *l)
 int
 anula(Lista *l)
 {
-    tipoPosicion aux = primero(l)->sig;
+    tipoPosicion aux = l->raiz->sig;
+    tipoPosicion sig;
 
     while(aux != NULL){
-        aux = aux->sig;
+        sig = aux->sig;
         free(aux);
+        aux = sig;
     }
 
-    l->raiz;
     l->ultimo = l->raiz;
     
 }

@@ -52,11 +52,13 @@ int main(int argc, char *argv[])
 		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
 		fprintf(f, " %d ,%g , %d \n", numElementos,tiempo,repeticiones);
 
-	}
+		anula(miLista);
+		destruye(miLista);
 
+	}
+	// Lista ordenada en orden creciente
 	fprintf(f,"\n Lista ordenada en orden creciente\n");
 	fprintf(f,"n,tiempoMedio,repeticiones\n");
-	// Lista ordenada en orden creciente
 
 	for (numElementos=5000;numElementos<=60000;numElementos=5000+numElementos) {
         
@@ -84,11 +86,14 @@ int main(int argc, char *argv[])
 		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
 		fprintf(f, " %d ,%g , %d \n", numElementos,tiempo,repeticiones);
 
+		anula(miLista);
+		destruye(miLista);
+
 	}
 
+	// Lista ordenada en orden decreciente
 	fprintf(f,"\n Lista ordenada en orden decreciente\n");
 	fprintf(f,"n,tiempoMedio,repeticiones\n");
-	// Lista ordenada en orden decreciente
 
 	for (numElementos=5000;numElementos<=60000;numElementos=5000+numElementos) {
         
@@ -116,12 +121,13 @@ int main(int argc, char *argv[])
 		printf( "\n Elementos: %d Tiempo :%g Repeticiones: %d \n", numElementos, tiempo, repeticiones);
 		fprintf(f, " %d ,%g , %d \n", numElementos,tiempo,repeticiones);
 
+		anula(miLista);
+		destruye(miLista);
+
 	}
 
-
-
-
    	fclose(f);
+	
 return 0;
 }
 
